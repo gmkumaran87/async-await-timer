@@ -7,6 +7,7 @@ const timeCount = (timer) => {
             if (timer === 0) {
                 counter.innerHTML = "";
                 greet.innerHTML = "Happy New Year...!";
+                timer = timer - 1;
             } else if (timer > 0) {
                 counter.innerHTML = timer;
                 timer = timer - 1;
@@ -22,9 +23,13 @@ const timeCount = (timer) => {
 };
 
 const getTimer = async(timer) => {
-    let i = timer;
-    for (i; i >= 0; i--) {
-        const timer = await timeCount(i);
+    let res = timer;
+    try {
+        while (res >= 0) {
+            res = await timeCount(res);
+        }
+    } catch (error) {
+        console.log(error);
     }
 };
 
